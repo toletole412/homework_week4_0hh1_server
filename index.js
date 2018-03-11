@@ -1,5 +1,10 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+const playersRouter = require('./players/router')
+const gamesRouter = require('./games/router')
+const squareRouter = require('./square/router')
+
 
 var Sequelize = require('sequelize')
 var sequelize = new Sequelize('postgres://postgres:secret@localhost:5432/postgres')
@@ -12,3 +17,8 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE')
   next()
 })
+
+
+app.use(gamesRouter)
+app.use(squareRouter)
+app.use(playersRouter)
