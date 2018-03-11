@@ -1,6 +1,14 @@
+'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('games', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
       board: {
         allowNull: false,
         type: Sequelize.ARRAY(Sequelize.INTEGER)
@@ -13,10 +21,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      {
-        timestamps: false,
-        createdAt: false,
-        updatedAt: false
+      createdAt: {
+        allowNull: true,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: true,
+        type: Sequelize.DATE
       }
     });
   },
