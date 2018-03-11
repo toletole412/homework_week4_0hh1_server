@@ -2,17 +2,20 @@ const Sequelize = require('sequelize')
 const sequelize = require('../db')
 
 const Games = sequelize.define('games', {
+    id: {
+      type: Sequelize
+    }
     board: {
-      type: Sequelize.STRING,
+      type: Sequelize.ARRAY(Sequelize.INTEGER),
       allowNull: false
     },
     locked: {
-      type: Sequelize.STRING,
+      type: Sequelize.ARRAY(Sequelize.INTEGER),
       allowNull: false
     },
     sidebar: {
-      type: Sequelize.JSON,
-      allowNull: true
+      type: Sequelize.STRING,
+      allowNull: false
     }
   },{
   tableName: 'games',
