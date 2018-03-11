@@ -21,7 +21,7 @@ router.post("/games", (req, res) => {
     locked: locked,
     sidebar: sidebar
   }
-
+  //where should i put fillboard function...
   Games
     .create(game)
     .then(entity => {
@@ -29,7 +29,7 @@ router.post("/games", (req, res) => {
       res.send({
         board: entity.board,
         locked: entity.locked //this is not Sure
-        sidebar: entity.sidebar
+        sidebar: entity.sidebar//this is not Sure
       });
     })
     .catch(err => {
