@@ -1,16 +1,19 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('games', {
-      id: {
+      board: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
-      info: {
+      locked: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+        allowNull: false
+      },
+      sidebar: {
         type: Sequelize.STRING,
-        allowNull: true
-      },{
+        allowNull: false
+      },
+      {
         timestamps: false,
         createdAt: false,
         updatedAt: false
