@@ -1,0 +1,13 @@
+{
+  "name": "0hh1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:toletole412/homework_week4_0hh1_server.git",
+  "author": "toletole412 <yoonjioh90@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pg": "6",
+    "sequelize": "^4.36.0"
+  }
+}
