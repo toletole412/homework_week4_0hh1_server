@@ -1,44 +1,34 @@
 const Router = require("express").Router;
 const Games = require('./model')
 const router = new Router();
-const { fillBoard, percentageFilled, numberOfValues, cols, rows, isPossibleMove,
-  removeRandomValuesFromBoard, filledPositions } = require("./gameLogic");
+const { fillBoard } = require("./gameLogic");
 
 
+module.exports = io => {
+  router
+    .post('/games', (req, res, next) => {
+      const newGame = {
+        board: [
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0]
+        ]
+      }
 
-router.post("/games", (req, res) => {
-  const initialState = [
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0]
-  ]
-
-  const game = {
-    board: JSON.stringfy(initialState),
-    locked: locked,
-    sidebar: sidebar
-  }
-  //where should i put fillboard function...
   Games
-    .create(game)
-    .then(entity => {
-      res.status(201);
-      res.send({
-        board: entity.board,
-        locked: entity.locked //this is not Sure
-        sidebar: entity.sidebar//this is not Sure
-      });
+    .create(newGame)
+    .then((game) => {
+    io.emit('action', {
+      type: 'CREATE_GAME',
+      payload: game
     })
-    .catch(err => {
-      console.error(err);
-      res.status(500).send({
-        message: "Something went wrong"
-      });
-    })
-  };
+    res.json(game)
+  })
+    .catch((error) => next(error))
+})
 
-
-module.exports = router;
+  return router
+};
